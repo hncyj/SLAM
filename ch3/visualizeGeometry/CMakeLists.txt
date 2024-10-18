@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 设置 Pangolin 的路径
-set(Pangolin_DIR "/home/chenyinjie/github/Pangolin/build")
+# set(Pangolin_DIR "/home/chenyinjie/github/Pangolin/build")
 
 # 查找 Eigen3 库
 find_package(Eigen3 REQUIRED)
@@ -55,7 +55,7 @@ target_include_directories(
 # 链接库
 target_link_libraries(
     visualize
-    PRIVATE  # 添加 PRIVATE 关键字
+    PRIVATE
     Eigen3::Eigen
     GLEW::GLEW
     OpenGL::GL
