@@ -13,6 +13,6 @@ cd build
 cmake ..
 cmake --build .
 
-cd useEigen
+cd visualizeGeometry
 
-./eigenMatrix
+./visualize
