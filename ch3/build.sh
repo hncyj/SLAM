@@ -12,3 +12,6 @@ cd build
 
 cmake ..
 cmake --build .
+
+cd examples
+./Draw
