@@ -12,7 +12,3 @@ cd build
 
 cmake ..
 cmake --build .
-
-cd visualizeGeometry
-
-./visualize
