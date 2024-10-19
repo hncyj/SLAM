@@ -80,11 +80,12 @@ int main() {
     while (!fin.eof()) {
         double time, tx, ty, tz, qx, qy, qz, qw;
         fin >> time >> tx >> ty >> tz >> qx >> qy >> qz >> qw;
+        
+        // 这部分和原代码不同
         Quaterniond q(qw, qx, qy, qz);
-        q.normalize();
-        Isometry3d Trw(q);
-        Trw.pretranslate(Vector3d(tx, ty, tz));
-        poses.push_back(Trw.inverse());
+        Isometry3d Twr(q);
+        Twr.pretranslate(Vector3d(tx, ty, tz));
+        poses.push_back(Twr);
     }
 
     cout << "read total " << poses.size() << " pose entries" << endl;
