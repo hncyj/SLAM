@@ -13,5 +13,6 @@ cd build
 cmake ..
 cmake --build .
 
-cd examples
-./Draw
+cd useEigen
+
+./useEigen

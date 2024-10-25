@@ -5,8 +5,8 @@ project(useEigen)
 find_package(Eigen3 REQUIRED)
 
 add_executable(
-    eigenMatrix
+    useEigen
     eigenMatrix.cpp
 )
 
-target_link_libraries(eigenMatrix Eigen3::Eigen)
+target_link_libraries(useEigen Eigen3::Eigen)
