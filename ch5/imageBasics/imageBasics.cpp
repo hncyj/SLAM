@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <vector>
 
 
 #include <opencv4/opencv2/core/core.hpp>
@@ -29,6 +30,33 @@ int main(int argc, char **argv) {
         cout << "请输入一张彩色图或灰度图." << endl;
         return 0;
     }
+
+    // 拆分图像通道
+    // std::vector<cv::Mat> channels;
+    // cv::split(image, channels);
+    
+    // cv::Mat blueChannel, greenChannel, redChannel;
+    // blueChannel = cv::Mat::zeros(image.size(), CV_8UC3);
+    // greenChannel = cv::Mat::zeros(image.size(), CV_8UC3);
+    // redChannel = cv::Mat::zeros(image.size(), CV_8UC3);
+
+    // // 将单个通道复制到彩色图像中
+    // cv::Mat blue[] = {channels[0], cv::Mat::zeros(image.size(), CV_8UC1), cv::Mat::zeros(image.size(), CV_8UC1)};
+    // cv::merge(blue, 3, blueChannel);
+
+    // cv::Mat green[] = {cv::Mat::zeros(image.size(), CV_8UC1), channels[1], cv::Mat::zeros(image.size(), CV_8UC1)};
+    // cv::merge(green, 3, greenChannel);
+
+    // cv::Mat red[] = {cv::Mat::zeros(image.size(), CV_8UC1), cv::Mat::zeros(image.size(), CV_8UC1), channels[2]};
+    // cv::merge(red, 3, redChannel);
+
+    // // 显示每个通道
+    // cv::imshow("蓝色通道（彩色显示）", blueChannel);
+    // cv::waitKey(0);
+    // cv::imshow("绿色通道（彩色显示）", greenChannel);
+    // cv::waitKey(0);
+    // cv::imshow("红色通道（彩色显示）", redChannel);
+    // cv::waitKey(0);
 
     // 遍历图像, 请注意以下遍历方式亦可使用于随机像素访问
     // 使用 std::chrono 来给算法计时
