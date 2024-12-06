@@ -13,7 +13,7 @@
 using namespace std;
 using namespace Eigen;
 
-const int MATRIX_SIZE = 50;
+const int MATRIX_SIZE = 10;
 
 int main(int argc, char** argv) {
     Matrix<float, 2, 3> matrix_23f;
@@ -24,8 +24,9 @@ int main(int argc, char** argv) {
     cout << "====================" << endl;
 
     Vector3d v_3d(3, 2, 1);
+    cout << "======= v_3d =======\n" << v_3d << endl; 
     cout << "matrix_23f * v_3d:\n" << matrix_23f.cast<double>() * v_3d << endl;
-    cout << "Transpose: " << (matrix_23f.cast<double>() * v_3d).transpose() << endl;
+    cout << "Transpose:\n" << (matrix_23f.cast<double>() * v_3d).transpose() << endl;
     cout << "====================" << endl;
 
     Matrix<float, 3, 1> matrix_31f(1, 2, 3);
@@ -48,7 +49,6 @@ int main(int argc, char** argv) {
     cout << "====================" << endl;
     matrix_dynamic.reshaped();
     cout << "matrix_dynamic reshaped: \n" << matrix_dynamic << endl;
-    cout << "====================" << endl;
 
     MatrixXd matrix_xd;
 
@@ -59,15 +59,14 @@ int main(int argc, char** argv) {
 
     cout << "========================================" << endl;
 
-    matrix_33 = Matrix3d::Random();                            // 随机数矩阵
-    cout << "random matrix: \n" << matrix_33 << endl;          // 原矩阵
-    cout << "transpose: \n" << matrix_33.transpose() << endl;  // 转置
-    cout << "sum: " << matrix_33.sum() << endl;                // 各元素和
-    cout << "trace: " << matrix_33.trace() << endl;            // 迹
-    cout << "times 10: \n" << 10 * matrix_33 << endl;          // 数乘
-    cout << "inverse: \n" << matrix_33.inverse() << endl;      // 逆
-    cout << "det: " << matrix_33.determinant() << endl;        // 行列式
-
+    matrix_33 = Matrix3d::Random();                              // 随机数矩阵
+    cout << "random matrix: \n" << matrix_33 << endl;            // 原矩阵
+    cout << "\ntranspose: \n" << matrix_33.transpose() << endl;  // 转置
+    cout << "\nsum: " << matrix_33.sum() << endl;                // 各元素和
+    cout << "\ntrace: " << matrix_33.trace() << endl;            // 迹
+    cout << "\ntimes 10: \n" << 10 * matrix_33 << endl;          // 数乘
+    cout << "\ninverse: \n" << matrix_33.inverse() << endl;      // 逆
+    cout << "\ndet: " << matrix_33.determinant() << endl;        // 行列式
     cout << "========================================" << endl;
 
     // Eigen vals and Eigen vectors
@@ -75,7 +74,6 @@ int main(int argc, char** argv) {
     cout << "Eigen vals: \n" << eigen_solver.eigenvalues() << endl;
     cout << "========================================" << endl;
     cout << "Eigen vectors: \n" << eigen_solver.eigenvectors() << endl;
-
     cout << "========================================" << endl;
 
     // solve equation
@@ -88,22 +86,21 @@ int main(int argc, char** argv) {
     // use inverse
     Matrix<double, MATRIX_SIZE, 1> x = matrix_NN.inverse() * v_Nd;
     cout << "time of normal inverse is " << 1000 * (clock() - time_stt) / (double)CLOCKS_PER_SEC << "ms" << endl;
-    cout << "x = " << x.transpose() << endl;
-
+    cout << "x = \n" << x.transpose() << endl;
     cout << "========================================" << endl;
+
     // use QR disolve
     time_stt = clock();
     x = matrix_NN.colPivHouseholderQr().solve(v_Nd);
     cout << "time of Qr decomposition is " << 1000 * (clock() - time_stt) / (double)CLOCKS_PER_SEC << "ms" << endl;
-    cout << "x = " << x.transpose() << endl;
-
+    cout << "x = \n" << x.transpose() << endl;
     cout << "========================================" << endl;
 
     time_stt = clock();
     x = matrix_NN.ldlt().solve(v_Nd);
     cout << "time of ldlt decomposition is "
         << 1000 * (clock() - time_stt) / (double)CLOCKS_PER_SEC << "ms" << endl;
-    cout << "x = " << x.transpose() << endl;
+    cout << "x = \n" << x.transpose() << endl;
 
     return 0;
 }
