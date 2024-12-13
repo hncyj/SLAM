@@ -15,8 +15,8 @@
 using namespace std;
 using namespace Sophus;
 
-const string estimated_file_path = "../examples/Estimated.txt";
-const string groundtruth_file_path = "../examples/Groundtruth.txt";
+const string estimated_file_path = "/home/chenyinjie/github/SLAM/ch4/examples/Estimated.txt";
+const string groundtruth_file_path = "/home/chenyinjie/github/SLAM/ch4/examples/Groundtruth.txt";
 
 using TrajectoryType = vector<SE3d, Eigen::aligned_allocator<SE3d>>;
 

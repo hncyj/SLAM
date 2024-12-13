@@ -1,9 +1,12 @@
-#include <opencv2/opencv.hpp>
 #include <string>
+
+// #include <opencv2/opencv.hpp>
+// #include <opencv4/opencv2/opencv.hpp>
+#include <opencv2/opencv.hpp>
 
 using namespace std;
 
-string image_file = "/home/chenyinjie/Github/SLAM/ch5/imageBasics/Distorted Image from Slambook2.png";
+string image_file = "/home/chenyinjie/github/SLAM/ch5/imageBasics/Distorted Image from Slambook2.png";
 
 int main(int argc, char** argv) {
     // 内参

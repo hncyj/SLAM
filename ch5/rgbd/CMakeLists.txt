@@ -2,6 +2,7 @@ find_package(Sophus REQUIRED)
 
 include_directories(${Sophus_INCLUDE_DIR})
 
+find_package(OpenCV REQUIRED)
 find_package(Pangolin REQUIRED)
 
 add_executable(

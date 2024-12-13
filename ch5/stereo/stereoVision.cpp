@@ -8,8 +8,8 @@
 using namespace std;
 using namespace Eigen;
 
-string left_file = "/home/chenyinjie/Github/SLAM/ch5/stereo/Stereo Left Image.png";
-string right_file = "/home/chenyinjie/Github/SLAM/ch5/stereo/Stereo Right Image.png";
+string left_file = "/home/chenyinjie/github/SLAM/ch5/stereo/Stereo Left Image.png";
+string right_file = "/home/chenyinjie/github/SLAM/ch5/stereo/Stereo Right Image.png";
 
 
 void showPointCloud(const vector<Vector4d, Eigen::aligned_allocator<Vector4d>> &pointcloud) {

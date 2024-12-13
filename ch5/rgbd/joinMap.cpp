@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     vector<cv::Mat> colorImgs, depthImgs;
     Trajectory poses;
 
-    ifstream fin("/home/chenyinjie/Github/SLAM/ch5/rgbd/Pose.txt");
+    ifstream fin("/home/chenyinjie/github/SLAM/ch5/rgbd/Pose.txt");
     if (!fin) {
         cerr << "pose.txt dosen't exist!" << endl;
         return -1;
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 
     // 初始化位姿数组以及彩色图像、深度图像数组
     for (int i = 0; i < 5; ++i) {
-        boost::format fmt("/home/chenyinjie/Github/SLAM/ch5/rgbd/%s/%d.%s");
+        boost::format fmt("/home/chenyinjie/github/SLAM/ch5/rgbd/%s/%d.%s");
         colorImgs.emplace_back(cv::imread((fmt % "color" % (i + 1) % "png").str()));
         depthImgs.emplace_back(cv::imread((fmt % "depth" % (i + 1) % "pgm").str(), -1));
 
