@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     cout << "v3d_r hat to vee (vector to invert symmetry matrix): \n" << Sophus::SO3d::vee(Sophus::SO3d::hat(v3d_R)) << endl;
     cout << "--------------" << endl;
 
-    // 扰动模型
+    // 扰动变换
     Vector3d update_v3d(1e-4, 0, 0);
     // 注意下述 exp 直接接受一个李代数向量
     // 在李代数指数运算的数学表示上，它接受的是一个反对称矩阵，但是exp()函数内置了向量到反对称的转换
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     cout << "--------------" << endl;
 
     // SE(3)
-    // 平移向量
+    // 为欧式群表示的变换矩阵添加平移向量
     Vector3d t(1, 0, 0);
     Sophus::SE3d SE3d_R_t(R, t);
     Sophus::SE3d SE3d_q_t(q, t);

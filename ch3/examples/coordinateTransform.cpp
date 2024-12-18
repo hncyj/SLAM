@@ -18,6 +18,7 @@ int main() {
     Eigen::Vector3d t1(0.3, 0.1, 0.1);
     Eigen::Vector3d t2(-0.1, 0.5, 0.3);
 
+    // 单位四元数
     q1.normalize();
     q2.normalized();
 

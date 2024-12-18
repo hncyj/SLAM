@@ -15,7 +15,7 @@ using namespace Eigen;
 
 const std::string file_path = "../../examples/Trajectory.txt";
 
-void DrawTrajectory(vector<Isometry3d, aligned_allocator<Isometry3d>> poses) {
+void DrawTrajectory(vector<Isometry3d, aligned_allocator<Isometry3d>>& poses) {
     // create pangolin window and plot the trajectory
     pangolin::CreateWindowAndBind("Trajectory Viewer", 1024, 768);
     glEnable(GL_DEPTH_TEST);
@@ -37,7 +37,7 @@ void DrawTrajectory(vector<Isometry3d, aligned_allocator<Isometry3d>> poses) {
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glLineWidth(2);
 
-        for (size_t i = 0; i < poses.size(); i++) {
+        for (size_t i = 0; i < poses.size() - 1; i++) {
             // 画每个位姿的三个坐标轴
             Vector3d Ow = poses[i].translation();
             Vector3d Xw = poses[i] * (0.1 * Vector3d(1, 0, 0));
@@ -65,7 +65,7 @@ void DrawTrajectory(vector<Isometry3d, aligned_allocator<Isometry3d>> poses) {
             glEnd();
         }
         pangolin::FinishFrame();
-        usleep(5000);   // sleep 5 ms
+        std::this_thread::sleep_for(std::chrono::seconds(5));   // sleep 5 ms
     }
 }
 

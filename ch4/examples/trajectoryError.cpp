@@ -33,7 +33,7 @@ TrajectoryType ReadFile(const string& path) {
         double time, tx, ty, tz, qx, qy, qz, qw;
         fin >> time >> tx >> ty >> tz >> qx >> qy >> qz >> qw;
         Eigen::Vector3d t(tx, ty, tz);
-        Eigen::Matrix3d R(Eigen::Quaterniond(qx, qy, qw, qz));
+        Eigen::Matrix3d R(Eigen::Quaterniond(qx, qy, qz, qw));
         SE3d T(R, t);
         vec.emplace_back(T);
     }
