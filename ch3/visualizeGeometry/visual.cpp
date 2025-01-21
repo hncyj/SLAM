@@ -18,7 +18,6 @@ struct RotationMatrix {
   Matrix3d matrix = Matrix3d::Identity();
 };
 
-// 设置输出格式
 ostream& operator<<(ostream& out, const RotationMatrix& rotation_matrix) {
   out.setf(ios::fixed);
   Matrix3d matrix = rotation_matrix.matrix;

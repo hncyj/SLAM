@@ -26,48 +26,51 @@ int main() {
 
     cout << "=========================================\n";
     Vector3d v(1, 0, 0);
-    // 使用旋转向量
+
     Vector3d v_rotated = rotation_vector * v;
     cout << v.transpose() << " after rotated: " << v_rotated.transpose() << endl;
     cout << "=========================================\n";
-    // 使用旋转矩阵
+
     v_rotated = rotation_matrix * v;
     cout << v.transpose() << " after rotated: " << v_rotated.transpose() << endl;
     cout << "=========================================\n";
     
-    // 使用欧拉角描述旋转
     // inline Eigen::Vector3d 
     // Eigen::MatrixBase<Eigen::Matrix3d>::eulerAngles(Eigen::Index a0, Eigen::Index a1, Eigen::Index a2) const;
     // Each of the three parameters a0,a1,a2 represents the respective rotation axis as an integer in {0,1,2}.
-    // 2, 1, 0 的顺序表示ZYX - rpy 旋转
+    // 2, 1, 0 means: Z-Y-X (rpy)
     Vector3d euler_angles = rotation_matrix.eulerAngles(2, 1, 0);
-    cout << "rpy: " << euler_angles.transpose() << endl;
+    cout << "euler rpy angles: " << euler_angles.transpose() << endl;
     cout << "=========================================\n";
 
-    // 欧式变换矩阵
-    Isometry3d T = Isometry3d::Identity();
-    T.rotate(rotation_vector); // 根据旋转向量设置变换矩阵中表示旋转部分的旋转矩阵
-    T.pretranslate(Vector3d(1, 3, 4)); // 设置变换矩阵的平移向量
+    // Notice that the order of rotation and translation is important
+    // rotation and translation are not commutative
+    // it will generate different euclidean transformation matrix
+    Isometry3d T(rotation_vector);
+    T.pretranslate(Vector3d(1, 3, 4));
+    // Isometry3d T(Vector3d(1, 3, 4));
+    // T.rotate(rotation_vector);
+
     cout << "Transform matrix: \n" << T.matrix() << endl;
 
     cout << "=========================================\n";
-    // 利用变换矩阵进行变换
+
     Vector3d v_transformed = T * v;
     cout << "v after T's transformed:\n" << v_transformed.transpose() << endl;
     cout << "=========================================\n";
 
-    // 四元数
+
     Quaterniond q = Quaterniond(rotation_vector);
     cout << "q:\n" << q.coeffs() << endl; // coeffs把虚部写在前面，实部在后面
     cout << "=========================================\n";
 
-    // 也可以通过旋转矩阵设置四元数
+
     q = Quaterniond(rotation_matrix);
     cout << "q:\n" << q.coeffs() << endl;
     cout << "=========================================\n";
 
-    v_rotated = q * v; // 这里重载了 * 表示 qvq^{-1}
-    cout << "q rotation: " << v_rotated.transpose() << endl;
+    v_rotated = q * v; // reload * operator, q * v = qvq^{-1}
+    cout << "v after q rotation: " << v_rotated.transpose() << endl;
 
     return 0;
 }
