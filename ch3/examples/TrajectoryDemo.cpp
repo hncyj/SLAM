@@ -70,6 +70,7 @@ void DrawTrajectory(vector<Isometry3d, aligned_allocator<Isometry3d>>& poses) {
 }
 
 int main() {
+    // read trajectory: position and transformation
     vector<Isometry3d, aligned_allocator<Isometry3d>> poses;
     ifstream fin(file_path);
     if (!fin.is_open()) {
@@ -78,11 +79,11 @@ int main() {
     }
 
     while (!fin.eof()) {
-        double time, tx, ty, tz, qx, qy, qz, qw;
-        fin >> time >> tx >> ty >> tz >> qx >> qy >> qz >> qw;
+        double time, tx, ty, tz, qx, qy, qz, qs;
+        fin >> time >> tx >> ty >> tz >> qx >> qy >> qz >> qs;
         
         // 这部分和原代码不同
-        Quaterniond q(qw, qx, qy, qz);
+        Quaterniond q(qs, qx, qy, qz);
         Isometry3d Twr(q);
         Twr.pretranslate(Vector3d(tx, ty, tz));
         poses.push_back(Twr);
