@@ -27,8 +27,10 @@ int main(int argc, char** argv) {
     cout << "--------------" << endl;
     cout << "SO(3) from quaternion:\n" << SO3d_q.matrix() << endl;
     cout << "--------------" << endl;
+
     Vector3d v3d_R = SO3d_R.log();
     Vector3d v3d_q = SO3d_q.log();
+
     cout << "SO3d_R to v3d_R: \n" << v3d_R << endl;
     cout << "--------------" << endl;
     cout << "SO3d_q to v3d_q: \n" << v3d_q << endl;
@@ -38,7 +40,7 @@ int main(int argc, char** argv) {
     cout << "--------------" << endl;
     cout << "v3d_q hat (invert symmetry matrix): \n" << Sophus::SO3d::hat(v3d_q) << endl;
     cout << "--------------" << endl;
-    cout << "v3d_r hat to vee (vector to invert symmetry matrix): \n" << Sophus::SO3d::vee(Sophus::SO3d::hat(v3d_R)) << endl;
+    cout << "v3d_R hat to vee (vector to invert symmetry matrix): \n" << Sophus::SO3d::vee(Sophus::SO3d::hat(v3d_R)) << endl;
     cout << "--------------" << endl;
 
     // 扰动变换
@@ -58,7 +60,6 @@ int main(int argc, char** argv) {
     cout << "--------------" << endl;
 
     // SE(3)
-    // 为欧式群表示的变换矩阵添加平移向量
     Vector3d t(1, 0, 0);
     Sophus::SE3d SE3d_R_t(R, t);
     Sophus::SE3d SE3d_q_t(q, t);

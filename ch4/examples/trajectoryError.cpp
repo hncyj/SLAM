@@ -15,8 +15,8 @@
 using namespace std;
 using namespace Sophus;
 
-const string estimated_file_path = "/home/chenyinjie/github/SLAM/ch4/examples/Estimated.txt";
-const string groundtruth_file_path = "/home/chenyinjie/github/SLAM/ch4/examples/Groundtruth.txt";
+const string estimated_file_path = "../../examples/Estimated.txt";
+const string groundtruth_file_path = "../../examples/Groundtruth.txt";
 
 using TrajectoryType = vector<SE3d, Eigen::aligned_allocator<SE3d>>;
 
@@ -98,6 +98,8 @@ int main(int argc, char** argv) {
     for (int i = 0; i < n; ++i) {
         SE3d gt = groundtruth[i];
         SE3d esti = estimated[i];
+        // .log() returns the Lie algebra representation of the SE3
+        // .norm() returns the length of the vector
         double error = (gt.inverse() * esti).log().norm();
         rmse += error * error;
     }
