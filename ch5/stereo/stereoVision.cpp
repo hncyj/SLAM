@@ -8,8 +8,8 @@
 using namespace std;
 using namespace Eigen;
 
-string left_file = "/home/chenyinjie/github/SLAM/ch5/stereo/Stereo Left Image.png";
-string right_file = "/home/chenyinjie/github/SLAM/ch5/stereo/Stereo Right Image.png";
+string left_file = "../Stereo Left Image.png";
+string right_file = "../Stereo Right Image.png";
 
 
 void showPointCloud(const vector<Vector4d, Eigen::aligned_allocator<Vector4d>> &pointcloud) {
@@ -52,13 +52,13 @@ void showPointCloud(const vector<Vector4d, Eigen::aligned_allocator<Vector4d>> &
 }
 
 int main(int argc, char** argv) {
-    // 内参
+    // intrinsic parameters
     double fx = 718.856;
     double fy = 718.856;
     double cx = 607.1928;
     double cy = 185.2157;
 
-    // 基线
+    // baseline
     double b = 0.573;
     
     // read image
@@ -71,14 +71,13 @@ int main(int argc, char** argv) {
     sgbm->compute(left, right, disparity_sgbm);
     disparity_sgbm.convertTo(disparity, CV_32F, 1.0 / 16.0f);
 
-    // 生成点云
     vector<Vector4d, Eigen::aligned_allocator<Vector4d>> pointcloud;
 
     for (int v = 0; v < left.rows; ++v) {
         for (int u = 0; u < left.cols; ++u) {
             if (disparity.at<float>(v, u) <= 0.0 || disparity.at<float>(v, u) >= 96.0) continue;
-
-            Vector4d point(0, 0, 0, left.at<uchar>(v, u) / 255.0); // 前三维为xyz,第四维为颜色
+            // x, y, depth, color
+            Vector4d point(0, 0, 0, left.at<uchar>(v, u) / 255.0);
             double x = (u - cx) / fx;
             double y = (v - cy) / fy;
             double depth = fx * b / disparity.at<float>(v, u);

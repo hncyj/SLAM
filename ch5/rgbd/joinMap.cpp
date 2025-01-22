@@ -12,7 +12,7 @@ using Trajectory = vector<Sophus::SE3d, Eigen::aligned_allocator<Sophus::SE3d>>;
 using Vector6d = Eigen::Matrix<double, 6, 1>;
 
 
-void showPointCloud(const vector<Vector6d, Eigen::aligned_allocator<Vector6d>> &pointcloud) {
+void showPointCloud(const vector<Vector6d, Eigen::aligned_allocator<Vector6d>>& pointcloud) {
     if (pointcloud.empty()) {
         cerr << "Point cloud is empty!" << endl;
         return;
@@ -57,15 +57,15 @@ int main(int argc, char** argv) {
     vector<cv::Mat> colorImgs, depthImgs;
     Trajectory poses;
 
-    ifstream fin("/home/chenyinjie/github/SLAM/ch5/rgbd/Pose.txt");
+    ifstream fin("../Pose.txt");
     if (!fin) {
         cerr << "pose.txt dosen't exist!" << endl;
         return -1;
     }
 
-    // 初始化位姿数组以及彩色图像、深度图像数组
+    // Initialize data
     for (int i = 0; i < 5; ++i) {
-        boost::format fmt("/home/chenyinjie/github/SLAM/ch5/rgbd/%s/%d.%s");
+        boost::format fmt("../%s/%d.%s");
         colorImgs.emplace_back(cv::imread((fmt % "color" % (i + 1) % "png").str()));
         depthImgs.emplace_back(cv::imread((fmt % "depth" % (i + 1) % "pgm").str(), -1));
 
@@ -77,9 +77,6 @@ int main(int argc, char** argv) {
         poses.emplace_back(pose);
     }
 
-    // 计算点云，拼接起来
-    // 深度相机直接就有深度信息
-    // 内参
     double cx = 325.5;
     double cy = 253.5;
     double fx = 518.0;
@@ -89,7 +86,7 @@ int main(int argc, char** argv) {
     vector<Vector6d, Eigen::aligned_allocator<Vector6d>> pointCloud;
     pointCloud.reserve(1000000);
 
-    // 遍历图像和深度图
+    // traverse every image
     for (int i = 0; i < 5; ++i) {
         cout << "transform image:" << i + 1 << endl;
         cv::Mat color = colorImgs[i];
@@ -125,7 +122,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-
-
-
